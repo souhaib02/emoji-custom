@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/package.schema.json",
+  "name": "ngx-emoji-custom",
+  "version": "0.0.9",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Customizable Slack-like emoji picker for Angular",
+  "peerDependencies": {
+    "@angular/core": ">=12.0.0-0"
+  },
+  "exports": {
+    "./picker": {
+      "default": "./picker.css"
+    }
+  },
+  "sideEffects": [ "*.css" ],
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "assets": [
+      "./picker.css"
+    ],
+    "dest": "../../../dist"
+  },
+  "keywords": [
+    "angular",
+    "emoji",
+    "picker"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ngx-emoji-custom/ngx-emoji",
+  "license": "MIT",
+  "sideEffects": [ "*.css" ],
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts"
+    },
+    "dest": "../../../../dist/emoji"
+  }
+}
