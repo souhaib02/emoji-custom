@@ -1,7 +1,7 @@
 {
   "$schema": "../../../node_modules/ng-packagr/package.schema.json",
   "name": "ngx-emoji-custom",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

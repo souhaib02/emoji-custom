@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -49,7 +50,6 @@ export interface EmojiEvent {
       [class.emoji-mart-emoji-native]="isNative"
       [class.emoji-mart-emoji-custom]="custom"
     >
-      <img [src]="imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
       <span [ngStyle]="style">
         <ng-template [ngIf]="isNative">{{ unified }}</ng-template>
         <ng-content></ng-content>
@@ -67,8 +67,7 @@ export interface EmojiEvent {
       [class.emoji-mart-emoji-native]="isNative"
       [class.emoji-mart-emoji-custom]="custom"
     >
-      <img [src]="imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
-      <span [ngStyle]="style" *ngIf="!custom">
+      <span [ngStyle]="style">
         <ng-template [ngIf]="isNative">{{ unified }}</ng-template>
         <ng-content></ng-content>
       </span>
@@ -106,9 +105,9 @@ export class EmojiComponent implements OnChanges, Emoji {
   @Input() backgroundImageFn: Emoji['backgroundImageFn'] = DEFAULT_BACKGROUNDFN;
   @Input() imageUrlFn?: Emoji['imageUrlFn'];
 
-  constructor(private emojiService: EmojiService) {}
+  constructor(private emojiService: EmojiService, private _ref: ChangeDetectorRef) {}
 
-  ngOnChanges() {
+  async ngOnChanges() {
     if (!this.emoji) {
       return (this.isVisible = false);
     }
@@ -144,9 +143,19 @@ export class EmojiComponent implements OnChanges, Emoji {
         this.style['word-break'] = 'keep-all';
       }
     } else if (data.custom) {
+      let width = `${this.size}px`;
+      let height = `${this.size}px`;
+      if(data.imageUrl){
+        const img = new Image();
+        img.src = data.imageUrl;
+        img.decode().then(() => {
+          this._ref.markForCheck();
+          this.style.width = `${ img.width * parseInt(height) / img.height }px`;
+        });
+      }
       this.style = {
-        width: `${this.size}px`,
-        height: `${this.size}px`,
+        width,
+        height,
         display: 'inline-block',
       };
       if (data.spriteUrl && this.sheetRows && this.sheetColumns) {

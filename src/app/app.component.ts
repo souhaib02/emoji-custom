@@ -37,7 +37,7 @@ const CUSTOM_EMOJIS: EmojiCategory[] = [
         isLocked:true,
         shortNames: ['octocat'],
         keywords: ['github'],
-        imageUrl: './assets/images/octocat.png',
+        imageUrl: 'https://github.githubassets.com/images/icons/emoji/shipit.png',
       },
       {
         name: 'Squirrel',

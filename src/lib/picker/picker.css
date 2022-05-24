@@ -140,9 +140,8 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: #9ca3af;
+  background-color: #f4f4f4;
   border-radius: 100%;
-  opacity: 0.2;
 }
 
 .emoji-mart-category-label {
