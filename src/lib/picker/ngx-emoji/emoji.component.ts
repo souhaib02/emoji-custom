@@ -49,7 +49,7 @@ export interface EmojiEvent {
       [class.emoji-mart-emoji-native]="isNative"
       [class.emoji-mart-emoji-custom]="custom"
     >
-      <img [src]="emoji.imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
+      <img [src]="imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
       <span [ngStyle]="style">
         <ng-template [ngIf]="isNative">{{ unified }}</ng-template>
         <ng-content></ng-content>
@@ -67,7 +67,7 @@ export interface EmojiEvent {
       [class.emoji-mart-emoji-native]="isNative"
       [class.emoji-mart-emoji-custom]="custom"
     >
-      <img [src]="emoji.imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
+      <img [src]="imageUrl" [ngStyle]="{height: size+'px'}" *ngIf="custom">
       <span [ngStyle]="style" *ngIf="!custom">
         <ng-template [ngIf]="isNative">{{ unified }}</ng-template>
         <ng-content></ng-content>
@@ -216,4 +216,5 @@ export class EmojiComponent implements OnChanges, Emoji {
     const emoji = this.getSanitizedData();
     this.emojiLeave.emit({ emoji, $event });
   }
+  get imageUrl(){return ((this.emoji as EmojiData).imageUrl)}
 }
